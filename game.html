@@ -83,6 +83,42 @@
           </form>
         </div>
       </div>
+
+      <div class="modal fade bd-example-modal-xl" id="modal-result" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-result-title"></h5>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <img class="img-responsive" id="image-result" src="" alt="" width="960" height="540">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="modal-play-again" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-result-title">Do you want to play again?</h5>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <img class="img-responsive" src="../assets/brand/question.png" alt="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="playAgain()">Play Again</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="finishGame()">Finish Game</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </main>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

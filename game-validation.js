@@ -1,6 +1,8 @@
+var simulationNumber = 0;
+
 function loadData() {
   var participant = JSON.parse(sessionStorage.getItem("participant"));
-  var simulationNumber = JSON.parse(sessionStorage.getItem("simulationNumber"));
+  simulationNumber = JSON.parse(sessionStorage.getItem("simulationNumber"));
   console.log(participant);
   console.log(simulationNumber);
 
@@ -27,7 +29,7 @@ function createSimulation() {
   }else{
 
     var participant = JSON.parse(sessionStorage.getItem("participant"));
-    var simulationNumber = JSON.parse(sessionStorage.getItem("simulationNumber"));
+    simulationNumber = JSON.parse(sessionStorage.getItem("simulationNumber"));
     
     var socialAssets = $('#socialAssets').val();
     var technicalAssets = $('#technicalAssets').val();
@@ -62,23 +64,23 @@ function createSimulation() {
         var respon = JSON.stringify(data);
         console.log("Response " + respon);
         console.log("Result " + data.resultDescription);
+        console.log("simulationNumber " + simulationNumber);
 
-        alert(data.resultDescription);
-
-        if(simulationNumber == 11){
-          window.location.href = "thanks.html";
-        }else{
-          let text = "Do you want to play again?";
-          if (confirm(text) == true) {
-            simulationNumber = simulationNumber + 1;
-            sessionStorage.setItem("simulationNumber", simulationNumber)
-            $("#game-number").html("Simulation: " + simulationNumber);
-            $('#socialAssets').val("");
-            $('#technicalAssets').val("");
-          } else {
-            window.location.href = "thanks.html";
-          }
+        var imagesPath = '../assets/brand/Slide1.PNG'
+        if(simulationNumber == 1 || simulationNumber == 5 || simulationNumber == 9){
+          imagesPath = '../assets/brand/Slide1.PNG'
+        } else if(simulationNumber == 2 || simulationNumber == 6 || simulationNumber == 10){
+          imagesPath = '../assets/brand/Slide2.PNG'
+        } else if(simulationNumber == 3 || simulationNumber == 7 || simulationNumber == 11){
+          imagesPath = '../assets/brand/Slide3.PNG'
+        } else if(simulationNumber == 4 || simulationNumber == 8){
+          imagesPath = '../assets/brand/Slide4.PNG'
         }
+
+        $("#image-result").attr("src",imagesPath);
+        $("#modal-result-title").html(data.resultDescription);
+        $('#modal-result').modal('show');
+        
       },
       error: function (request, status, error) {
         console.log("Errrrrrrrror " + error);
@@ -90,4 +92,34 @@ function createSimulation() {
       }
     });
   } 
+}
+
+function closeModal(){
+  //alert(data.resultDescription);
+
+  if(simulationNumber == 11){
+    window.location.href = "thanks.html";
+  }
+
+  $('#modal-result').modal('hide');
+  $('#modal-play-again').modal('show');
+
+  
+}
+
+function playAgain(){
+  
+  $('#modal-play-again').modal('hide');
+
+  simulationNumber = simulationNumber + 1;
+  sessionStorage.setItem("simulationNumber", simulationNumber)
+  $("#game-number").html("Simulation: " + simulationNumber);
+  $('#socialAssets').val("");
+  $('#technicalAssets').val("");
+  
+}
+
+function finishGame(){
+  $('#modal-play-again').modal('hide');
+  window.location.href = "thanks.html";
 }
